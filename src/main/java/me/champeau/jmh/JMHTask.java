@@ -20,12 +20,15 @@ import org.gradle.api.file.ConfigurableFileCollection;
 import org.gradle.api.file.FileCollection;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.model.ObjectFactory;
+import org.gradle.api.provider.Property;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.Classpath;
+import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.Optional;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
+import org.gradle.api.tasks.options.Option;
 import org.gradle.jvm.toolchain.JavaLauncher;
 import org.gradle.process.ExecOperations;
 
@@ -88,4 +91,127 @@ public abstract class JMHTask extends DefaultTask implements JmhParameters {
         return classpath;
     }
 
+    @Option(option = "jmhVersion", description = "JMH version")
+    void setJmhVersion(String jmhVersion) {
+        this.getJmhVersion().set(jmhVersion);
+    }
+
+    @Option(option = "includeTests", description = "Include test sources in generated jar file")
+    void setIncludeTests(Property<Boolean> includeTests) {
+        this.getIncludeTests().set(includeTests);
+    }
+
+    @Option(option = "includes", description = "Include pattern for benchmarks to be executed")
+    void setIncludes(List<String> includes){
+        this.getIncludes().set(includes);
+    }
+
+    @Option(option = "excludes", description = "Exclude pattern for benchmarks to be executed")
+    void setExcludes(List<String> excludes){
+        this.getExcludes().set(excludes);
+    }
+
+    @Option(option = "benchmarkMode", description = "Benchmark mode. Available modes are: [Throughput/thrpt, AverageTime/avgt, SampleTime/sample, SingleShotTime/ss, All/all]")
+    void setBenchmarkMode(List<String> benchmarkMode) {
+        this.getBenchmarkMode().set(benchmarkMode);
+    }
+
+    @Option(option = "iterations", description = "Number of measurement iterations to do.")
+    void setIterations(Integer iterations) {
+        this.getIterations().set(iterations);
+    }
+
+    @Option(option = "batchSize", description = "Batch size: number of benchmark method calls per operation. (some benchmark modes can ignore this setting)")
+    void setBatchSize(Integer batchSize){
+        this.getBatchSize().set(batchSize);
+    }
+
+    @Option(option = "fork", description = "How many times to forks a single benchmark. Use 0 to disable forking altogether")
+    void setFork(Integer fork) {
+        this.getFork().set(fork);
+    }
+
+    @Option(option = "failOnError", description = "Should JMH fail immediately if any benchmark had experienced the unrecoverable error?")
+    void getFailOnError(Boolean failOnerror) {
+        this.getFailOnError().set(failOnerror);
+    }
+
+    @Option(option = "forceGC", description = "Should JMH force GC between iterations?")
+    void getForceGC(Boolean forceGC) {
+        this.getForceGC().set(forceGC);
+    }
+/*
+
+    @Option(option = "jvm")
+    Property<String> getJvm();
+
+    @Option(option = "jvmArgs")
+    ListProperty<String> getJvmArgs();
+
+    @Option(option = "jvmArgsAppend")
+    ListProperty<String> getJvmArgsAppend();
+
+    @Option(option = "jvmArgsPrepend")
+    ListProperty<String> getJvmArgsPrepend();
+
+    @Option(option = "operationsPerInvocation")
+    Property<Integer> getOperationsPerInvocation();
+
+    @Option(option = "property<String>> getBenchmarkParameters")
+    MapProperty<String, ListProperty<String>> getBenchmarkParameters();
+
+    @Option(option = "profilers")
+    ListProperty<String> getProfilers();
+
+    @Option(option = "timeOnIteration")
+    Property<String> getTimeOnIteration();
+
+    @Option(option = "resultExtension")
+    Property<String> getResultExtension();
+
+    @Option(option = "resultFormat")
+    Property<String> getResultFormat();
+
+    @Option(option = "synchronizeIterations")
+    Property<Boolean> getSynchronizeIterations();
+
+    @Option(option = "threads")
+    Property<Integer> getThreads();
+
+    @Option(option = "threadGroups")
+    ListProperty<Integer> getThreadGroups();
+
+    @Option(option = "timeUnit")
+    Property<String> getTimeUnit();
+
+    @Option(option = "verbosity")
+    Property<String> getVerbosity();
+
+    @Option(option = "jmhTimeout")
+    Property<String> getJmhTimeout();
+
+    @Option(option = "warmup")
+    Property<String> getWarmup();
+
+    @Option(option = "warmupBatchSize")
+    Property<Integer> getWarmupBatchSize();
+
+    @Option(option = "warmupForks")
+    Property<Integer> getWarmupForks();
+
+    @Option(option = "warmupIterations")
+    Property<Integer> getWarmupIterations();
+
+    @Option(option = "warmupMode")
+    Property<String> getWarmupMode();
+
+    @Option(option = "warmupBenchmarks")
+    ListProperty<String> getWarmupBenchmarks();
+
+    @Option(option = "zip64")
+    Property<Boolean> getZip64();
+
+    @Option(option = "duplicateClassesStrategy")
+    Property<DuplicatesStrategy> getDuplicateClassesStrategy();
+*/
 }
