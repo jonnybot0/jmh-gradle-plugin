@@ -48,7 +48,7 @@ class DefaultsConfigurer {
         return format.toLowerCase();
     }
 
-    public static void configureConvention(JmhParameters from, JmhParameters into) {
+    public static void configureConvention(JmhParameters from, JMHTask into) {
         into.getJmhVersion().convention(from.getJmhVersion());
         into.getIncludeTests().convention(from.getIncludeTests());
         into.getIncludes().convention(from.getIncludes());
