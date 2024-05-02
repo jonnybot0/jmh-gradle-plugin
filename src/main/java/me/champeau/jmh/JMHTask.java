@@ -36,7 +36,7 @@ import java.util.List;
 /**
  * The JMH task is responsible for launching a JMH benchmark.
  */
-public abstract class JMHTask extends DefaultTask implements JmhParameters {
+public abstract class JMHTask extends DefaultTask implements JmhSetters {
     private final static String JAVA_IO_TMPDIR = "java.io.tmpdir";
 
     @Inject

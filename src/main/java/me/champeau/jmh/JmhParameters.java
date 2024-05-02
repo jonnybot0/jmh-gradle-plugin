@@ -22,27 +22,20 @@ import org.gradle.api.provider.MapProperty;
 import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.Optional;
-import org.gradle.api.tasks.options.Option;
 
 public interface JmhParameters extends WithJavaToolchain {
-
-    @Option(option = "jmhVersion", description = "JMH version")
     @Input
     Property<String> getJmhVersion();
 
-    @Option(option = "includeTests", description = "Include test sources in generated jar file")
     @Input
     Property<Boolean> getIncludeTests();
 
-    @Option(option = "includes", description = "Include pattern for benchmarks to be executed")
     @Input
     ListProperty<String> getIncludes();
 
-    @Option(option = "excludes", description = "Exclude pattern for benchmarks to be executed")
     @Input
     ListProperty<String> getExcludes();
 
-    @Option(option = "benchmarkMode", description = "Benchmark mode. Available modes are: [Throughput/thrpt, AverageTime/avgt, SampleTime/sample, SingleShotTime/ss, All/all]")
     @Input
     ListProperty<String> getBenchmarkMode();
 
@@ -50,26 +43,17 @@ public interface JmhParameters extends WithJavaToolchain {
     @Optional
     Property<Integer> getIterations();
 
-    @Option(option = "iterations", description = "Number of measurement iterations to do.")
-    default void setIterations(Integer iterations) {
-        getIterations().set(iterations);
-    }
-
-    @Option(option = "batchSize", description = "Batch size: number of benchmark method calls per operation. (some benchmark modes can ignore this setting)")
     @Input
     @Optional
     Property<Integer> getBatchSize();
 
-    @Option(option = "fork", description = "How many times to forks a single benchmark. Use 0 to disable forking altogether")
     @Input
     @Optional
     Property<Integer> getFork();
 
-    @Option(option = "failOnError", description = "Should JMH fail immediately if any benchmark had experienced the unrecoverable error?")
     @Input
     Property<Boolean> getFailOnError();
 
-    @Option(option = "forceGC", description = "Should JMH force GC between iterations?")
     @Input
     Property<Boolean> getForceGC();
 
@@ -131,7 +115,6 @@ public interface JmhParameters extends WithJavaToolchain {
     @Optional
     Property<String> getJmhTimeout();
 
-    @Option(option = "warmup", description = "")
     @Input
     @Optional
     Property<String> getWarmup();
@@ -144,7 +127,6 @@ public interface JmhParameters extends WithJavaToolchain {
     @Optional
     Property<Integer> getWarmupForks();
 
-    @Option(option = "warmupIterations", description = "")
     @Input
     @Optional
     Property<Integer> getWarmupIterations();
